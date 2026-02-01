@@ -6,13 +6,15 @@ function CharacterList() {
   const results = useSelector(selectFilteredCharacters)
 
   return (
-    <div className='mt-5'>
+    <div className='mt-8'>
       {results.length === 0 && (
-        <div className='text-center text-gray-500'>Sin resultados</div>
+        <div className='text-center text-slate-500'>Sin resultados</div>
       )}
-      {results?.map(item => (
-        <CharacterCard item={item} key={item.id} />
-      ))}
+      <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-3'>
+        {results?.map(item => (
+          <CharacterCard item={item} key={item.id} />
+        ))}
+      </div>
     </div>
   )
 }

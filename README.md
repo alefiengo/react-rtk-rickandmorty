@@ -2,6 +2,8 @@
 
 App demo que consume la API de Rick and Morty con React y Redux Toolkit. Incluye búsqueda y filtrado de personajes.
 
+Demo: https://react-rtk-rickandmorty.netlify.app/
+
 ## Requisitos
 - Node.js 18+ (recomendado)
 - npm
