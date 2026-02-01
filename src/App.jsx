@@ -1,31 +1,39 @@
-import { Suspense, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { setCharacter } from './redux/characterSlice'
-import { fetchData } from './helpers/fetchData'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchCharacters } from './redux/characterSlice'
 import CharacterList from './components/CharacterList'
 import CharacterSearch from './components/CharacterSearch'
 import CharacterFilter from './components/CharacterFilter'
 
-const apiData = fetchData('https://rickandmortyapi.com/api/character')
-
 function App() {
   const dispatch = useDispatch()
-  const data = apiData.read()
+  const status = useSelector(state => state.character.status)
+  const error = useSelector(state => state.character.error)
 
   useEffect(() => {
-    dispatch(setCharacter(data))
-  }, [data, dispatch])
+    if (status === 'idle') {
+      dispatch(fetchCharacters())
+    }
+  }, [dispatch, status])
 
   return (
     <div className='container mx-auto mt-20'>
       <h1 className='text-3xl font-extrabold tracking-tight text-center'>
         Rick and Morty
       </h1>
-      <Suspense fallback={<div>Loading...</div>}>
-        <CharacterSearch />
-        <CharacterFilter />
-        <CharacterList />
-      </Suspense>
+      {status === 'loading' && (
+        <div className='text-center mt-6'>Cargando...</div>
+      )}
+      {status === 'failed' && (
+        <div className='text-center mt-6 text-red-500'>{error}</div>
+      )}
+      {status === 'succeeded' && (
+        <>
+          <CharacterSearch />
+          <CharacterFilter />
+          <CharacterList />
+        </>
+      )}
     </div>
   )
 }

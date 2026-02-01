@@ -1,26 +1,51 @@
-import { useDispatch } from 'react-redux'
-import { filterCharacterByStatus } from '../redux/characterSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { setStatusFilter } from '../redux/characterSlice'
 
-function Filter() {
+function CharacterFilter() {
   const dispatch = useDispatch()
+  const statusFilter = useSelector(state => state.character.statusFilter)
 
-  const handleFilter = (value) => {
-    dispatch(filterCharacterByStatus(value))
-  };
+  const handleFilter = value => {
+    dispatch(setStatusFilter(value))
+  }
+
+  const baseItemClasses =
+    'px-4 py-2 text-gray-800 bg-gray-100 hover:bg-gray-300 cursor-pointer'
+  const activeItemClasses = 'bg-gray-300'
 
   return (
     <div className='flex justify-center items-center m-3'>
       <ul className='flex space-x-8 p-4'>
-        <li className='px-4 py-2 text-gray-800 bg-gray-100 hover:bg-gray-300 cursor-pointer' onClick={() => handleFilter('')}>
-            All
+        <li
+          className={`${baseItemClasses} ${
+            statusFilter === '' ? activeItemClasses : ''
+          }`}
+          onClick={() => handleFilter('')}
+        >
+          All
         </li>
-        <li className='px-4 py-2 text-gray-800 bg-gray-100 hover:bg-gray-300 cursor-pointer' onClick={() => handleFilter('Alive')}>
+        <li
+          className={`${baseItemClasses} ${
+            statusFilter === 'alive' ? activeItemClasses : ''
+          }`}
+          onClick={() => handleFilter('alive')}
+        >
           Alive
         </li>
-        <li className='px-4 py-2 text-gray-800 bg-gray-100 hover:bg-gray-300 cursor-pointer' onClick={() => handleFilter('Dead')}>
+        <li
+          className={`${baseItemClasses} ${
+            statusFilter === 'dead' ? activeItemClasses : ''
+          }`}
+          onClick={() => handleFilter('dead')}
+        >
           Dead
         </li>
-        <li className='px-4 py-2 text-gray-800 bg-gray-100 hover:bg-gray-300 cursor-pointer' onClick={() => handleFilter('unknown')}>
+        <li
+          className={`${baseItemClasses} ${
+            statusFilter === 'unknown' ? activeItemClasses : ''
+          }`}
+          onClick={() => handleFilter('unknown')}
+        >
           Unknown
         </li>
       </ul>      
@@ -28,4 +53,4 @@ function Filter() {
   )
 }
 
-export default Filter
+export default CharacterFilter

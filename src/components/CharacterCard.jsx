@@ -1,9 +1,16 @@
 function CharacterCard({ item }) {
-  
-  return(
+  const originName = item.origin?.name || 'Desconocido'
+  const locationName = item.location?.name || 'Desconocido'
+
+  return (
     <div className="flex m-2">
       <div className="flex-none w-48 relative">
-        <img src={item.image} alt={item.name} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+        <img
+          src={item.image}
+          alt={item.name}
+          className="absolute inset-0 w-full h-full object-cover"
+          loading="lazy"
+        />
       </div>
       <div className="flex-auto m-3">
         <div className="flex flex-wrap">
@@ -26,10 +33,10 @@ function CharacterCard({ item }) {
             Species: {item.species}
           </div>
           <div className="w-full flex-none text-sm font-medium text-slate-700 mt-2">
-            Origin: {item.origin.name}
+            Origin: {originName}
           </div>
           <div className="w-full flex-none text-sm font-medium text-slate-700 mt-2">
-            Location: {item.location.name}
+            Location: {locationName}
           </div>
         </div>
       </div>

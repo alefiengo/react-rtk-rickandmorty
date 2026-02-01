@@ -1,20 +1,35 @@
-# react-rtk-rickandmorty
-Basic consumption example of the Rick and Morty Rest API, using React and RTK
+# React RTK Rick and Morty
 
-## Deploy on Netlify
-Visit [https://react-rtk-rickandmorty.netlify.app](https://react-rtk-rickandmorty.netlify.app/)
+App demo que consume la API de Rick and Morty con React y Redux Toolkit. Incluye búsqueda y filtrado de personajes.
 
-## Project setup
-```
+## Requisitos
+- Node.js 18+ (recomendado)
+- npm
+
+## Instalación
+```bash
 npm install
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run dev
+## Scripts
+```bash
+npm run dev      # desarrollo
+npm run build    # build de producción
+npm run preview  # previsualización del build
+npm run lint     # linting
+npm run format   # formateo
 ```
 
-### Compiles and minifies for production
+## Estructura mínima
 ```
-npm run build
+src/
+  components/
+  redux/
+  main.jsx
+  App.jsx
 ```
+
+## Cómo ejecutar
+1. Instala dependencias.
+2. Ejecuta `npm run dev`.
+3. Abre la URL que indique Vite.

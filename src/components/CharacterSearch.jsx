@@ -1,11 +1,12 @@
-import { useDispatch } from 'react-redux'
-import { filterCharacterByName } from '../redux/characterSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { setQuery } from '../redux/characterSlice'
 
-function Search() {
+function CharacterSearch() {
   const dispatch = useDispatch()
+  const query = useSelector(state => state.character.query)
 
   const handleSearch = e => {
-    dispatch(filterCharacterByName(e.target.value))
+    dispatch(setQuery(e.target.value))
   }
 
   return (
@@ -14,10 +15,11 @@ function Search() {
         type='text'
         placeholder='Search by Name'
         onChange={handleSearch}
+        value={query}
         className='form-input px-4 py-3 rounded-full'
       />
     </div>
   )
 }
 
-export default Search
+export default CharacterSearch
